@@ -222,10 +222,9 @@ function renderProducts(products) {
     const tr = document.createElement('tr');
     tr.innerHTML = `
       <td>${product.name}</td>
-      <td>${product.description || ''}</td>
       <td>R$ ${Number(product.price).toFixed(2)}</td>
       <td>
-        <button onclick="editProduct('${product.id}', '${product.name.replace(/'/g, "&#39;")}', '${(product.description||'').replace(/'/g, "&#39;")}', '${product.price}')">Editar</button>
+        <button onclick="editProduct('${product.id}', '${product.name.replace(/'/g, "&#39;")}', '${product.price}')">Editar</button>
         <button onclick="deleteProduct('${product.id}')">Excluir</button>
       </td>
     `;
@@ -271,13 +270,11 @@ if (productForm) {
 function editProduct(id, name, description, price) {
   document.getElementById('productId').value = id;
   document.getElementById('productName').value = name;
-  document.getElementById('productDescription').value = description;
   document.getElementById('productPrice').value = price;
 }
 function resetProductForm() {
   document.getElementById('productId').value = '';
   document.getElementById('productName').value = '';
-  document.getElementById('productDescription').value = '';
   document.getElementById('productPrice').value = '';
 }
 async function deleteProduct(id) {
@@ -331,3 +328,4 @@ function renderMenu(products) {
     tbody.appendChild(tr);
   });
 } 
+

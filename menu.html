@@ -15,47 +15,47 @@
         </header>
 
         <section class="secao-cardapio">
-            <h2>Bebidas</h2>
-            <ul class="lista-itens">
-                <li>
-                    <div class="item-nome">Caipirinha</div>
-                    <div class="item-descricao">Limão, cachaça, açúcar</div>
-                    <div class="item-preco">R$ 15,00</div>
-                </li>
-                <li>
-                    <div class="item-nome">Cerveja IPA</div>
-                    <div class="item-descricao">Cerveja artesanal com notas cítricas</div>
-                    <div class="item-preco">R$ 18,00</div>
-                </li>
-                </ul>
-        </section>
-
-        <section class="secao-cardapio">
-            <h2>Comidas</h2>
-            <ul class="lista-itens">
-                <li>
-                    <div class="item-nome">Hambúrguer Eliobar</div>
-                    <div class="item-descricao">Pão artesanal, carne, queijo, bacon, molho especial</div>
-                    <div class="item-preco">R$ 25,00</div>
-                </li>
-                <li>
-                     <div class="item-nome">Porção de Batata Frita</div>
-                    <div class="item-descricao">Batata frita crocante com molho da casa</div>
-                    <div class="item-preco">R$ 20,00</div>
-                </li>
-                </ul>
-        </section>
-
-         <section class="secao-cardapio">
-            <h2>Sobremesas</h2>
-            <ul class="lista-itens">
-                <li>
-                    <div class="item-nome">Brownie com Sorvete</div>
-                    <div class="item-descricao">Brownie de chocolate com sorvete de creme</div>
-                    <div class="item-preco">R$ 18,00</div>
-                </li>
-                </ul>
+            <h2>Produtos</h2>
+            <ul class="lista-itens" id="menu-list">
+                <!-- Produtos serão inseridos aqui via JS -->
+            </ul>
+            <div id="menuError" class="error" style="display:none;color:#d8000c;background:#ffd2d2;padding:8px;border-radius:4px;margin-top:10px;"></div>
         </section>
     </div>
+    <script>
+    const API_URL = 'http://localhost:3000/api';
+    async function loadMenu() {
+        const menuList = document.getElementById('menu-list');
+        const errorDiv = document.getElementById('menuError');
+        menuList.innerHTML = '';
+        errorDiv.style.display = 'none';
+        try {
+            const res = await fetch(API_URL + '/menu');
+            const data = await res.json();
+            if (res.ok) {
+                if (data.length === 0) {
+                    menuList.innerHTML = '<li><div class="item-nome">Nenhum produto cadastrado ainda.</div></li>';
+                } else {
+                    data.forEach(produto => {
+                        const li = document.createElement('li');
+                        li.innerHTML = `
+                            <div class="item-nome">${produto.name}</div>
+                            <div class="item-descricao">${produto.description || ''}</div>
+                            <div class="item-preco">R$ ${Number(produto.price).toFixed(2).replace('.', ',')}</div>
+                        `;
+                        menuList.appendChild(li);
+                    });
+                }
+            } else {
+                errorDiv.textContent = data.message || 'Erro ao carregar cardápio';
+                errorDiv.style.display = 'block';
+            }
+        } catch (err) {
+            errorDiv.textContent = 'Erro ao conectar à API';
+            errorDiv.style.display = 'block';
+        }
+    }
+    loadMenu();
+    </script>
 </body>
 </html>

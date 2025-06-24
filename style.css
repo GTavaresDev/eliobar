@@ -139,7 +139,9 @@ h3 {
 }
 
 /* Form Styling */
-.product-form-section form {
+/* This section handles both .product-form-section form and .user-form-section form */
+.product-form-section form,
+.user-form-section form { /* Added .user-form-section form */
     display: flex;
     flex-direction: column;
     gap: 20px; /* Increased space between form groups */
@@ -153,7 +155,10 @@ h3 {
     font-size: 1em;
 }
 
+/* --- IMPORTANT FIX: Consistent styling for all input types --- */
 .form-group input[type="text"],
+.form-group input[type="email"], /* Added this line */
+.form-group input[type="password"], /* Added this line */
 .form-group input[type="number"],
 .form-group textarea {
     width: calc(100% - 24px); /* Account for padding and border */
@@ -161,11 +166,14 @@ h3 {
     border: 1px solid #ccd0d5;
     border-radius: 6px;
     font-size: 1.05em;
-    box-sizing: border-box;
+    box-sizing: border-box; /* Crucial for consistent width calculation */
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
+/* --- IMPORTANT FIX: Consistent focus styling for all input types --- */
 .form-group input[type="text"]:focus,
+.form-group input[type="email"]:focus, /* Added this line */
+.form-group input[type="password"]:focus, /* Added this line */
 .form-group input[type="number"]:focus,
 .form-group textarea:focus {
     border-color: #007bff;
@@ -222,22 +230,22 @@ h3 {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Table Styling */
-#productsTable {
+/* --- IMPORTANT FIX: Table Styling - Now targets generic tables and specific ones --- */
+table { /* Applies to all tables by default */
     width: 100%;
     border-collapse: separate;
     border-spacing: 0 10px; /* Space between rows */
     margin-top: 25px;
 }
 
-#productsTable th,
-#productsTable td {
+table th, /* Targets all table headers */
+table td { /* Targets all table data cells */
     padding: 15px;
     text-align: left;
     border-bottom: 1px solid #eee; /* Lighter bottom border */
 }
 
-#productsTable th {
+table th { /* Targets all table headers */
     background-color: #e9ecef;
     color: #495057;
     font-weight: 600; /* Slightly bolder headers */
@@ -246,25 +254,25 @@ h3 {
     border-top: 1px solid #ddd;
 }
 
-#productsTable tbody tr {
+table tbody tr { /* Targets all table body rows */
     background-color: #fff;
     transition: background-color 0.3s ease, transform 0.2s ease;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03); /* Subtle row shadow */
 }
 
-#productsTable tbody tr:hover {
+table tbody tr:hover { /* Targets all table body rows on hover */
     background-color: #f6f9fc;
     transform: translateY(-2px);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08); /* More pronounced shadow on hover */
 }
 
-/* Action buttons within table rows */
-#productsTable td:last-child {
+/* Action buttons within table rows (ensure your buttons have .action-btn class) */
+table td:last-child { /* Targets the last cell in any table row */
     text-align: center;
     white-space: nowrap; /* Prevents buttons from wrapping if too many actions */
 }
 
-#productsTable td .action-btn {
+table td .action-btn {
     padding: 8px 12px;
     border-radius: 5px;
     font-size: 0.85em;
@@ -328,14 +336,11 @@ h3 {
     font-size: 0.9em;
     box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
 }
-/* cardapio.css */
 
-body {
-    font-family: 'Roboto', sans-serif;
-    margin: 0;
-    background-color: #f4f4f4;
-    color: #333;
-}
+/* cardapio.css styles - Integrated */
+/* Note: If you want to keep cardapio.css separate, remove these styles from here
+   and ensure your cardapio.html links to cardapio.css directly.
+   However, for a single style.css, it's fine to include them. */
 
 .cardapio-container {
     width: 80%;

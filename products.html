@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Painel de Produtos</title>
+    <title>Gerenciamento de Usuários - Painel Administrativo</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
 </head>
@@ -16,7 +16,6 @@
             <div class="header-right">
                 <span class="user-info">Olá, Admin!</span>
                 <nav>
-                    <button onclick="window.location='users.html'" class="btn-secondary">Voltar para Usuários</button>
                     <button onclick="logout()" class="btn-logout">Sair</button>
                 </nav>
             </div>
@@ -25,55 +24,56 @@
         <aside class="sidebar">
             <nav class="sidebar-nav">
                 <ul>
-                    <li><a href="products.html" class="active">Gerenciar Produtos</a></li>
-                    <li><a href="users.html">Gerenciar Usuários</a></li>
-                    <li><a href="menu.html">Menu</Menu></a></li>
+                    <li><a href="products.html">Gerenciar Produtos</a></li>
+                    <li><a href="users.html" class="active">Gerenciar Usuários</a></li>
+                    <li><a href="menu.html">Cardápio</a></li>
+
                 </ul>
             </nav>
         </aside>
 
         <main class="main-content">
             <div class="container">
-                <section class="product-form-section card">
-                    <h3>Adicionar/Editar Produto</h3>
-                    <form id="productForm">
-                        <input type="hidden" id="productId">
+                <section class="user-form-section card">
+                    <h3>Adicionar/Editar Usuário</h3>
+                    <form id="userForm">
+                        <input type="hidden" id="userId">
                         <div class="form-group">
-                            <label for="productName">Nome do Produto:</label>
-                            <input type="text" id="productName" placeholder="Ex: Cerveja IPA" required>
+                            <label for="userName">Nome:</label>
+                            <input type="text" id="userName" placeholder="Nome completo do usuário" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="userEmail">Email:</label>
+                            <input type="email" id="userEmail" placeholder="email@exemplo.com" required>
                         </div>
                         <div class="form-group">
-                            <label for="productDescription">Descrição:</label>
-                            <textarea id="productDescription" placeholder="Ex: Cerveja artesanal com notas cítricas"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="productPrice">Preço:</label>
-                            <input type="number" id="productPrice" placeholder="Ex: 15.99" step="0.01" min="0" required>
+                            <label for="userPassword">Senha:</label>
+                            <input type="password" id="userPassword" placeholder="Deixe em branco para manter a atual">
                         </div>
                         <div class="form-actions">
-                            <button type="submit" class="btn-primary">Salvar Produto</button>
-                            <button type="button" onclick="resetProductForm()" class="btn-secondary">Limpar Campos</button>
+                            <button type="submit" class="btn-primary">Salvar Usuário</button>
+                            <button type="button" onclick="resetForm()" class="btn-secondary">Limpar Campos</button>
                         </div>
                     </form>
                 </section>
 
                 <hr class="section-divider">
 
-                <section class="product-list-section card">
-                    <h3>Produtos Cadastrados</h3>
-                    <table id="productsTable">
+                <section class="user-list-section card">
+                    <h3>Usuários Cadastrados</h3>
+                    <table id="usersTable">
                         <thead>
                             <tr>
                                 <th>Nome</th>
-                                <th>Descrição</th>
-                                <th>Preço</th>
+                                <th>Email</th>
                                 <th>Ações</th>
                             </tr>
                         </thead>
                         <tbody>
                             </tbody>
                     </table>
-                    <div id="productError" class="error"></div>
+                    <div id="userError" class="error"></div>
                 </section>
             </div>
         </main>
