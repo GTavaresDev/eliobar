@@ -1,5 +1,5 @@
 // URL base da API
-const API_URL = 'https://eliobar-api.vercel.app/api';
+const API_URL = 'https://eliobar.vercel.app//api';
 // ajuste se necessário
 
 // Utilidades
