@@ -1,5 +1,6 @@
 // URL base da API
-const API_URL = 'http://localhost:3000/api'; // ajuste se necessário
+const API_URL = 'https://eliobar-api.vercel.app/api';
+// ajuste se necessário
 
 // Utilidades
 function showError(id, msg) {
